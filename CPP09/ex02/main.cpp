@@ -92,32 +92,28 @@ int main(int argc, char* argv[])
     }
 
     // === Test avec std::vector ===
-    std::cout << "=== Using std::vector ===" << std::endl;
     PmergeMe vectorPmerge(numbers);
 
-    displaySequence("Sequence (vector, unsorted): ", numbers);
+    displaySequence("Sequence (unsorted): ", numbers);
 
     clock_t start = clock();
     vectorPmerge.process();
     clock_t end = clock();
 
-    displaySequence("Sequence (vector, sorted): ", vectorPmerge.getLarge());
+    displaySequence("Sequence (sorted): ", vectorPmerge.getLarge());
 
     double timeVector = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
     std::cout << "Time to process with std::vector: " << timeVector << " us" << std::endl;
 
     // === Test avec std::deque ===
-    std::cout << "=== Using std::deque ===" << std::endl;
     PmergeMe dequePmerge(numbers);
 
     std::deque<int> dequeNumbers(numbers.begin(), numbers.end());
-    displaySequence("Sequence (deque, unsorted): ", dequeNumbers);
 
     start = clock();
     dequePmerge.processDeque();
     end = clock();
 
-    displaySequence("Sequence (deque, sorted): ", dequePmerge.getLargeDeque());
 
     double timeDeque = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
     std::cout << "Time to process with std::deque: " << timeDeque << " us" << std::endl;
